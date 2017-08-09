@@ -187,4 +187,17 @@ class YOLONet(object):
             tf.losses.add_loss(coord_loss)
             
             tf.summary.scalar('class_loss',class_loss)
+            tf.summary.scalar('object_loss',object_loss)
+            tf.summary.scalar('noobject_loss',noobject_loss)
+            tf.summary.scalar('coord_loss',coord_loss)
             
+            tf.summary.histogram('boxes_delta_x', boxes_delta[:,:,:,:,0])
+            tf.summary.histogram('boxes_delta_y', boxes_delta[:,:,:,:,1])
+            tf.summary.histogram('boxes_delta_w', boxes_delta[:,:,:,:,2])
+            tf.summary.histogram('boxes_delta_h', boxes_delta[:,:,:,:,3])
+            tf.summary.histogram('iou',iou_predict_truth)
+            
+def leaky_relu(alpha):
+    def op(inputs):
+        return tf.maximum(alpha*inputs, inputs, name='leaky_relu')
+    return op
