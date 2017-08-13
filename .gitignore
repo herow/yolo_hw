@@ -1,0 +1,6 @@
+*.pyc
+*.swp
+
+#tensorflow config
+*.pkl
+/data
